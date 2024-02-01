@@ -4,11 +4,11 @@ import getAllRelatedData from '@salesforce/apex/ObjectFetch.getAllRelatedData';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class ObjMetadataReference extends LightningElement {
-    @api objReference
-    @track fieldOptionList = []
-    selectedFieldList = [];
-    listFieldName =[];
-    relatedDataList = []
+    @api objReference //getting data from the Parent
+    @track fieldOptionList = [] //Storing values that fetch from wired method
+    selectedFieldList = []; //for displaying column name in datatable
+    listFieldName =[]; //for returning parameter as list to apex method for field Name
+    relatedDataList = [] //to store the value that got from Imperative call
 
     @wire(getAllRelatedFields,{objName:'$objReference'})objFields({error,data}){
         if(data && data.length>0){
@@ -20,9 +20,10 @@ export default class ObjMetadataReference extends LightningElement {
     }
 
     get getFields(){
-        return this.fieldOptionList;
+        return this.fieldOptionList; //return to template dual-listbox component
     }
 
+    //show button 
     handleShow(){
         getAllRelatedData({objName: this.objReference, fieldList: this.listFieldName}).then(result =>{
             let fetchedDataList = [];
@@ -32,10 +33,12 @@ export default class ObjMetadataReference extends LightningElement {
 
     }
 
+    //Reset button
     handleReset(){
         this.relatedDataList = [];
     }
 
+    //on field select in dual-list box
     onFieldSelect(evt){
         var selectedField = evt.detail.value;
         if(selectedField.length>0){

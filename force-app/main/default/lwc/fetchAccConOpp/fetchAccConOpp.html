@@ -1,0 +1,20 @@
+<template>
+    <lightning-card icon-name="standard:account" variant="base">
+        <div class="slds-p-around_medium lgc-bg">
+            <lightning-input type="text" label="Enter Id here" onchange={onChangeInput}></lightning-input>
+            <lightning-button variant="brand" label="Search" title="Primary action" onclick={handleSearch} class="slds-m-left_x-small"></lightning-button>
+        </div>
+    </lightning-card>
+    <lightning-card icon-name="standard:contact" variant="base">
+      <template if:true={getContact}>
+        <lightning-datatable key-field="id" data={getConData} columns={getConColumns}></lightning-datatable>
+      </template>
+      <template if:false={getContact}>No Data Available</template>
+    </lightning-card>
+    <lightning-card icon-name="standard:Opportunity" variant="base">
+      <template if:true={getOpportunity}>
+        <lightning-datatable key-field="id" data={getOppData} columns={getOppColumns}></lightning-datatable>
+      </template>
+      <template if:false={getOpportunity}>No Data Available</template>
+    </lightning-card>
+</template>

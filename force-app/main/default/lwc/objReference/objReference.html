@@ -1,0 +1,11 @@
+<template>
+    <lightning-card>
+        <lightning-combobox name="objName" label="Object Name" value={objValue} placeholder="Select Object" options={objOptions} onchange={onObjSelect}></lightning-combobox> 
+    </lightning-card>
+    <template if:true={objValue}>
+        <lightning-card>
+            <c-obj-metadata-reference obj-reference={objValue}></c-obj-metadata-reference>
+        </lightning-card>
+    </template>
+       
+</template>

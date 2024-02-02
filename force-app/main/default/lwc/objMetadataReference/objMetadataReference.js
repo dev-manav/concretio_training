@@ -1,11 +1,11 @@
-import { LightningElement, wire, api, track } from 'lwc';
+import { LightningElement, wire, api } from 'lwc';
 import getAllRelatedFields from '@salesforce/apex/ObjectFetch.getAllRelatedFields';
 import getAllRelatedData from '@salesforce/apex/ObjectFetch.getAllRelatedData';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class ObjMetadataReference extends LightningElement {
     @api objReference //getting data from the Parent
-    @track fieldOptionList = [] //Storing values that fetch from wired method
+    fieldOptionList = [] //Storing values that fetch from wired method
     selectedFieldList = []; //for displaying column name in datatable
     listFieldName =[]; //for returning parameter as list to apex method for field Name
     relatedDataList = [] //to store the value that got from Imperative call

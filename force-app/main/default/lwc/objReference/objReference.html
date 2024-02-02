@@ -1,7 +1,17 @@
 <template>
+    <!-- for Object List -->
     <lightning-card>
         <lightning-combobox name="objName" label="Object Name" value={objValue} placeholder="Select Object" options={objOptions} onchange={onObjSelect}></lightning-combobox> 
     </lightning-card>
+
+    <!-- For Related Object List -->
+    <template if:true={objValue}>
+        <lightning-card>
+            <lightning-dual-listbox name="Fields Name" label="Select Fields" source-label="Available" selected-label="Selected" field-level-help="Select your preferred languages" options={getFields} onchange={onFieldSelect}></lightning-dual-listbox>
+        </lightning-card>
+    </template>
+    
+    <!-- For Related Field List -->
     <template if:true={objValue}>
         <lightning-card>
             <c-obj-metadata-reference obj-reference={objValue}></c-obj-metadata-reference>

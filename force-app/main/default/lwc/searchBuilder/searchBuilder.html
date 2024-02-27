@@ -1,0 +1,39 @@
+<template>
+    <lightning-combobox data-id="object" name="objectList" label="Select Object" value={objectValue} placeholder="Select Object" options={objectOption} onchange={handleObject} required="true" ></lightning-combobox>
+
+    <lightning-button variant="base" label="Add Filter" title="Add Filter" onclick={handleAddFilter} class="slds-m-left_x-small"></lightning-button>
+
+    <template for:each={comboboxFieldList} for:item="combo">
+        <div class="slds-grid" key={index}>
+
+            <lightning-input class="slds-col slds-size_1-of-5" type="text" label="S.No." placeholder={combo.sNo} disabled></lightning-input>
+            <lightning-combobox data-id={combo.fieldValue} class="slds-col slds-size_1-of-5" name="fieldList" label="Select Field" value={fieldValue} placeholder="Select field" options={fieldOption} onchange={handlefield} ></lightning-combobox> 
+            <lightning-combobox data-id={combo.operatorValue} class="slds-col slds-size_1-of-5" name="operatorList" label="Select Operator" value={operatorValue} placeholder="Select Operator" options={combo.operatorOption} ></lightning-combobox>
+
+            <template if:false={combo.haveInput}>
+                <lightning-input data-id={combo.inputText} class="slds-col slds-size_1-of-5" type="text" label="Enter some text"></lightning-input>
+            </template>
+            <template if:true={combo.haveInput}>
+                <lightning-combobox data-id={combo.inputText} class="slds-col slds-size_1-of-5" name="valueList" label="Select Value" value={inputValue} placeholder="Select Value" options={combo.haveInputOption} ></lightning-combobox>
+            </template>
+
+            <lightning-button data-id={combo.sNo} variant="brand" label="Remove" title="RemoveRow" value={combo.sNo} onclick={handleRemoveFilter} class="slds-m-left_x-small slds-col slds-size_1-of-5 slds-m-top_large"></lightning-button>
+        </div>  
+    </template>
+
+    <lightning-button variant="base" label="Add Advance Criteria" title="Add Filter" onclick={handleAdvanceFilter} class="slds-m-left_x-small"></lightning-button>
+
+    <template if:true={showAdvanceSearch}>
+        <lightning-textarea name="advanceSearch" data-id="advanceSearch" label="Enter advance criteria" ></lightning-textarea>
+    </template>
+    
+    <div class="slds-p-top_large">
+        <lightning-button variant="brand" label="Search" title="Search" onclick={handleSearch} class="slds-m-left_x-small"></lightning-button>
+    </div>
+
+    <template if:true={objectData}>
+        <lightning-datatable key-field="id" data={objectData} columns={columns} hide-checkbox-column="true"></lightning-datatable>
+    </template>
+
+     
+</template>
